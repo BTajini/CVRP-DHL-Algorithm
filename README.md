@@ -1,5 +1,5 @@
 # CVRP-Genetic-Algorithm
-##Genetic Algorithm applied on DHL use case 
+##Genetic Algorithm applied on CVRP use case 
 
 
 
