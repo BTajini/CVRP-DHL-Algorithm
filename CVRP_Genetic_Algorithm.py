@@ -9,14 +9,14 @@
 #---Release--- : 17/10/2016 - V3.0
 
 #library implemented in the project
------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------
 import sys, random
 from math import sqrt, cells
 import time
 import pandas as pd   # library for reading our excel file
-----------------------------------------------------------------------------------------------------
-
-excel_file_path = ("C:\Users\Badr\PycharmProjects\Project_Metro_Paris\Matrice_Plan_Transport.xls")   #add xlsx for excel 2010
+#----------------------------------------------------------------------------------------------------
+#must edit the path for the dataset
+excel_file_path = ("/CVRP-DHL-Algorithm/Data/Matrice_Plan_Transport.xls")   #add xlsx for excel 2010
 
 df1 = pd.read_excel(open(excel_file_path,'rb'), sheetname="Sheet1",header = 0,index_col = 0,convert_float = True) #read demand of client
 df3 = pd.read_excel(open(excel_file_path,'rb'), sheetname="Sheet3",header = 0,index_col = 0,convert_float = True) #read agency with depot
@@ -36,12 +36,12 @@ values3 = df3['code_agence','nom_agence','hub','depart','arrivee','cp'].values
 #get the values for a given column sheet 4
 values4 = df4['NAD_3251','X','Y'].values
 #get the values for a given column sheet 1
-values1 = df1['Rousset 01','Sitra 02','Moulinois 03','Gefco 04-05','Danzas 06','Masoye Gardon 07','Gefco 08','Fubra 09','TCP 10','CITE Messagerie 11','Cransac 12','Danzas 13','NormaTrans 14	15','Grimaud 16','Grimaud 17','Grimaud 19','Trancausse Marseille','Danzas 21','Arcatime 22','Vaquier 23-87','24','Danzas 25','Danzas 26','Danzas 28','Arcatime 29','Baldaroux 30','Danzas 31','Dubois 32','Danzas 33','Danzas 34','Arcatime 35','MRCI 36','Danzas 37','Danzas 38','Danzas 39','Dupuy 40','SPTG 41','Danzas 42','Archer 43','Danzas 49','Danzas 45','Querci Messagerie 46','Sernam 47','Arcatime 50','Danzas 51','Gondrand 52','Arcatime 53','Danzas 54','Arcatime 56','Danzas 57','LSH 58','Danzas 59','Sotrapoise 60','Arcatime 61','Coupé 62','Danzas 63','BMV 64','Danzas 65','Messagerie du midi 66','Danzas 67','Danzas 68','Danzas 69','Lesire 70','BMV 71','Arcatime 72','BMV 73','Danzas 74','Danzas 75','Danzas 76','Danzas 94','Arcatime 79','Prevote 80','NTM 81','Sodetram 83','Guyon 84','Arcatime 85','Arctime 86','Danzas 88','BMV 89','Danzas 90'].values
+values1 = df1['Rousset 01','Sitra 02','Moulinois 03','Gefco 04-05','Danzas 06','Masoye Gardon 07','Gefco 08','Fubra 09','TCP 10','CITE Messagerie 11','Cransac 12','Danzas 13','NormaTrans 14	15','Grimaud 16','Grimaud 17','Grimaud 19','Trancausse Marseille','Danzas 21','Arcatime 22','Vaquier 23-87','24','Danzas 25','Danzas 26','Danzas 28','Arcatime 29','Baldaroux 30','Danzas 31','Dubois 32','Danzas 33','Danzas 34','Arcatime 35','MRCI 36','Danzas 37','Danzas 38','Danzas 39','Dupuy 40','SPTG 41','Danzas 42','Archer 43','Danzas 49','Danzas 45','Querci Messagerie 46','Sernam 47','Arcatime 50','Danzas 51','Gondrand 52','Arcatime 53','Danzas 54','Arcatime 56','Danzas 57','LSH 58','Danzas 59','Sotrapoise 60','Arcatime 61','CoupÃ© 62','Danzas 63','BMV 64','Danzas 65','Messagerie du midi 66','Danzas 67','Danzas 68','Danzas 69','Lesire 70','BMV 71','Arcatime 72','BMV 73','Danzas 74','Danzas 75','Danzas 76','Danzas 94','Arcatime 79','Prevote 80','NTM 81','Sodetram 83','Guyon 84','Arcatime 85','Arctime 86','Danzas 88','BMV 89','Danzas 90'].values
 
 #get a data frame with selected columns
 FORMAT3 = ['code_agence','nom_agence','hub','depart','arrivee','cp']
 FORMAT4 = ['NAD_3251','X','Y']
-FORMAT1 = ['Rousset 01','Sitra 02','Moulinois 03','Gefco 04-05','Danzas 06','Masoye Gardon 07','Gefco 08','Fubra 09','TCP 10','CITE Messagerie 11','Cransac 12','Danzas 13','NormaTrans 14	15','Grimaud 16','Grimaud 17','Grimaud 19','Trancausse Marseille','Danzas 21','Arcatime 22','Vaquier 23-87','24','Danzas 25','Danzas 26','Danzas 28','Arcatime 29','Baldaroux 30','Danzas 31','Dubois 32','Danzas 33','Danzas 34','Arcatime 35','MRCI 36','Danzas 37','Danzas 38','Danzas 39','Dupuy 40','SPTG 41','Danzas 42','Archer 43','Danzas 49','Danzas 45','Querci Messagerie 46','Sernam 47','Arcatime 50','Danzas 51','Gondrand 52','Arcatime 53','Danzas 54','Arcatime 56','Danzas 57','LSH 58','Danzas 59','Sotrapoise 60','Arcatime 61','Coupé 62','Danzas 63','BMV 64','Danzas 65','Messagerie du midi 66','Danzas 67','Danzas 68','Danzas 69','Lesire 70','BMV 71','Arcatime 72','BMV 73','Danzas 74','Danzas 75','Danzas 76','Danzas 94','Arcatime 79','Prevote 80','NTM 81','Sodetram 83','Guyon 84','Arcatime 85','Arctime 86','Danzas 88','BMV 89','Danzas 90']
+FORMAT1 = ['Rousset 01','Sitra 02','Moulinois 03','Gefco 04-05','Danzas 06','Masoye Gardon 07','Gefco 08','Fubra 09','TCP 10','CITE Messagerie 11','Cransac 12','Danzas 13','NormaTrans 14	15','Grimaud 16','Grimaud 17','Grimaud 19','Trancausse Marseille','Danzas 21','Arcatime 22','Vaquier 23-87','24','Danzas 25','Danzas 26','Danzas 28','Arcatime 29','Baldaroux 30','Danzas 31','Dubois 32','Danzas 33','Danzas 34','Arcatime 35','MRCI 36','Danzas 37','Danzas 38','Danzas 39','Dupuy 40','SPTG 41','Danzas 42','Archer 43','Danzas 49','Danzas 45','Querci Messagerie 46','Sernam 47','Arcatime 50','Danzas 51','Gondrand 52','Arcatime 53','Danzas 54','Arcatime 56','Danzas 57','LSH 58','Danzas 59','Sotrapoise 60','Arcatime 61','CoupÃ© 62','Danzas 63','BMV 64','Danzas 65','Messagerie du midi 66','Danzas 67','Danzas 68','Danzas 69','Lesire 70','BMV 71','Arcatime 72','BMV 73','Danzas 74','Danzas 75','Danzas 76','Danzas 94','Arcatime 79','Prevote 80','NTM 81','Sodetram 83','Guyon 84','Arcatime 85','Arctime 86','Danzas 88','BMV 89','Danzas 90']
 df_selected3 = df[FORMAT3]
 df_selected4 = df[FORMAT4]
 df_selected1 = df[FORMAT1]
