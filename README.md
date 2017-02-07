@@ -1,5 +1,5 @@
 # CVRP-Genetic-Algorithm
-##Genetic Algorithm applied on CVRP use case 
+##Solving capacitated vehicle routing problem with Genetic Algorithm
 
 
 
