@@ -1,21 +1,16 @@
 # CVRP-Genetic-Algorithm
-##Solving capacitated vehicle routing problem with Genetic Algorithm
+#### Solving capacitated vehicle routing problem with Genetic Algorithm
 
-
-
-###Overview
+### Overview
 (update in progress)
 
-###The objective
-
+### The objective
 (update in progress)
 
-###Time Complexity Of CVRP Algorithm
-
+### Time Complexity Of CVRP Algorithm
 Worst Case Scenario (update in progress)
 
 ### Test
-
 Test model :
 
 ```bash
